@@ -41,6 +41,11 @@ class BertEmbeddingDataset(Dataset):
 
 def load_books(folder):
     """Load all .txt files from the specified folder and preprocess them."""
+    
+
+def load_data(batch_size=8, folder:str="data/gutenberg_children"):
+    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+
     all_sentences = []
     for file in os.listdir(folder):
         if file.endswith(".txt") and not file == 'log.txt':
@@ -48,4 +53,7 @@ def load_books(folder):
                 text = f.read()
                 sentences = preprocess_text(text)
                 all_sentences.extend(sentences)
-    return all_sentences
+
+    dataset = BertEmbeddingDataset(all_sentences, tokenizer)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    return dataloader
