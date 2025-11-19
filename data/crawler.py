@@ -3,10 +3,10 @@ import time
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
-DOWNLOAD_DIR = "gutenberg_children"
+DOWNLOAD_DIR = "data/gutenberg_children"
 LOG_FILE = os.path.join(DOWNLOAD_DIR, "log.txt")
 BASE_URL = "https://www.gutenberg.org"
-CATEGORY_URL = "https://www.gutenberg.org/ebooks/bookshelf/26"  # Children and Young Adults
+CATEGORY_URL = "https://www.gutenberg.org/ebooks/bookshelf/636"  # Children and Young Adults
 
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
@@ -28,33 +28,111 @@ def main():
         page.goto(CATEGORY_URL)
         time.sleep(3)
 
-        links = page.query_selector_all("li.booklink a.link")
-        book_urls = [BASE_URL + l.get_attribute("href") for l in links if l.get_attribute("href")]
-        log(f"Found {len(book_urls)} book URLs.")
+        all_book_urls = set()
+        seen = set()
 
-        for i, url in enumerate(book_urls, start=1):
+        start = 1              
+        per_page = 25
+        
+        while len(all_book_urls)<2:
+            if start == 1:
+                url = CATEGORY_URL
+            else:
+                url = f"{CATEGORY_URL}?start_index={start}"
+
+            page.goto(url)
+            page.wait_for_load_state("networkidle")
+            time.sleep(0.4)  
+            links = page.query_selector_all("a[href^='/ebooks/']")
+            found_this_page = 0
+
+            for l in links:
+                href = l.get_attribute("href")
+                if not href:
+                    continue
+                parts = href.split("/")
+                if len(parts) == 3 and parts[-1].isdigit():
+                    full = BASE_URL + href
+                    if full not in seen:
+                        seen.add(full)
+                        all_book_urls.add(full)
+                        found_this_page += 1
+
+            log(f"Found {found_this_page} new book links on page start_index={start} (total {len(all_book_urls)})")
+
+            # stop when this page had no new canonical book links (end of listing)
+            if found_this_page == 0:
+                log("No new books found on this page — assuming end of listing.")
+                break
+
+            # prepare next page
+            start += per_page
+
+        # all_book_urls now contains the deduplicated list across pages
+        log(f"Collected {len(all_book_urls)} book URLs across pages.")
+        # log(f"Collected URLs:\n" + "\n".join(book_urls))
+
+        for i, url in enumerate(sorted(all_book_urls), start=1):
             try:
                 page.goto(url)
                 time.sleep(2)
 
-                # Optional: Skip non-English books
-                lang_label = page.query_selector("tr:has(td:has-text('Language')) td a")
-                if lang_label and lang_label.inner_text().strip().lower() != "english":
-                    log(f"Skipped non-English book ({i}): {url}")
-                    continue
-
                 # Find UTF-8 Plain Text link
                 link = page.query_selector('a[href*="utf8.txt"]') or page.query_selector('a:has-text("Plain Text UTF-8")')
 
-                if link:
-                    with page.expect_download() as download_info:
-                        link.click()
-                    download = download_info.value
+                # Step 1: Find any text link
+                link = (
+                    page.query_selector("a:has-text('Plain Text UTF-8')") or
+                    page.query_selector("a:has-text('Plain Text')") or
+                    page.query_selector("a[href$='.txt']") or
+                    page.query_selector("a[href*='txt']")
+                )
+
+                if not link:
+                    log(f"No text-format link found ({i}): {url}")
+                    continue
+
+                # Step 2: Click the link normally (no expect_download)
+                with page.expect_navigation():
+                    link.click()
+
+                # Step 3: Check if we are now on a raw text file
+                new_url = page.url
+
+                # Raw .txt files appear as plain text; Playwright shows them as page content
+                if new_url.endswith(".txt") or ".txt" in new_url:
+                    text_content = page.content()   # this returns HTML wrapper, so better get raw text
+
+                    # Better: get plain text body through page.inner_text
+                    try:
+                        text_content = page.inner_text("body")
+                    except:
+                        text_content = page.content()
+
+                    content_size_kb = len(text_content.encode("utf-8")) / 1024
+
+                    if content_size_kb < 50:
+                        print("Skipped (too small)")
+                        continue
+
+
                     filename = os.path.join(DOWNLOAD_DIR, f"book_{i}.txt")
-                    download.save_as(filename)
-                    log(f"Downloaded {filename}")
-                else:
-                    log(f"No UTF-8 text link found ({i}): {url}")
+                    with open(filename, "w", encoding="utf-8", errors="ignore") as f:
+                        f.write(text_content)
+
+                    log(f"Downloaded (direct text) {filename}")
+                    continue
+
+                # If it wasn’t a direct .txt file, fallback to browser download if available
+                try:
+                    with page.expect_download(timeout=5000) as dl_info:
+                        link.click()
+                    dl = dl_info.value
+                    filename = os.path.join(DOWNLOAD_DIR, f"book_{i}.txt")
+                    dl.save_as(filename)
+                    log(f"Downloaded (file download) {filename}")
+                except:
+                    log(f"Could not download book {i}, no direct .txt or download: {url}")
 
             except Exception as e:
                 log(f"Error on book {i} ({url}): {e}")
