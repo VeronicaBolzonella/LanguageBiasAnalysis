@@ -1,32 +1,36 @@
 import argparse
 import numpy as np
 import torch
-from torch.optim import AdamW
-from transformers import BertModel
+import pickle
 
 
-from models.fine_tuner import finetune
+from training.fine_tuner import train_word2vec, extract_embeddings
 from data.data_loader import load_data
 
-def main(epochs=3, batch_size:int=8, folder:str="data/gutenberg_children"):
-    model = BertModel.from_pretrained("bert-base-uncased")
-    optimizer = AdamW(model.parameters(), lr=2e-5)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+def main(epochs=3, vector_size:int=300, folder:str="data/preprocessed_sentences.pkl"):
+    # Load preprocessed data
+    with open(folder, "rb") as f:
+        data = pickle.load(f)
 
-    dataloader = load_data(batch_size ,folder)
+    # Train
+    model = train_word2vec(data, vector_size=vector_size, epochs=epochs)
 
-    embeddings = finetune(dataloader, model, device, optimizer, epochs)
+    # Get embedding matrix
+    vectors, vocab = extract_embeddings(model)
 
-    np.save("models/bert_finetuned_embeddings.npy", embeddings.numpy())
-    print("Saved embeddings to bert_finetuned_embeddings.npy")
+    print(vectors.shape)
+    print(vocab[:20])
+    print("Vector for 'home':", model.wv['home'][:10])
+    print(model.wv.most_similar("home", topn=5))
+
+
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_folder", type=str, default="data/gutenberg_children", help="Path to the dataset")
-    parser.add_argument("--epochs", type=int, default=3, help="number of training epochs, default to 3")
-    parser.add_argument("--batch_size", type=int, default=8, help="Batch size for finetuning")
+    parser.add_argument("--data_folder", type=str, default="data/preprocessed_sentences.pkl", help="Path to the dataset")
+    parser.add_argument("--vector_size", type=int, default=300, help="Size of embeddings")
+    parser.add_argument("--epochs", type=int, default=8, help="Number of epochs for training")
 
     args = parser.parse_args()
-    main(epochs=args.epochs, batch_size=args.batch_size, folder=args.data_folder)
+    main(epochs=args.epochs, vector_size=args.vector_size, folder=args.data_folder)
