@@ -20,7 +20,7 @@ def log(message):
 
 def main():
     with sync_playwright() as p:
-        browser = p.firefox.launch(headless=False)
+        browser = p.firefox.launch(headless=True)
         context = browser.new_context(accept_downloads=True)
         page = context.new_page()
 
