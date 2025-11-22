@@ -20,7 +20,7 @@ def log(message):
 
 def main():
     with sync_playwright() as p:
-        browser = p.firefox.launch(headless=True)
+        browser = p.chromium.launch(headless=True)
         context = browser.new_context(accept_downloads=True)
         page = context.new_page()
 
@@ -34,7 +34,7 @@ def main():
         start = 1              
         per_page = 25
         
-        while len(all_book_urls)<2:
+        while len(all_book_urls)<500:
             if start == 1:
                 url = CATEGORY_URL
             else:
