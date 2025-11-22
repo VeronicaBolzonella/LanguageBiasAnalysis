@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 import torch
 import pickle
+from gensim.models import KeyedVectors
 
 
 from training.fine_tuner import train_word2vec, extract_embeddings
@@ -19,10 +20,13 @@ def main(epochs=3, vector_size:int=300, folder:str="data/preprocessed_sentences.
     vectors, vocab = extract_embeddings(model)
 
     print(vectors.shape)
-    print(vocab[:20])
-    print("Vector for 'home':", model.wv['home'][:10])
     print(model.wv.most_similar("home", topn=5))
 
+    # Save vectors
+    model.wv.save("embeddings.kv")
+
+    # to load do
+    # vectors = KeyedVectors.load("word_vectors.kv")
 
 
 
