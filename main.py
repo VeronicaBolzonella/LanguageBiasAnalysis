@@ -1,17 +1,15 @@
 import argparse
-import numpy as np
-import torch
-import pickle
-from gensim.models import KeyedVectors
-
 import os
 import nltk
 nltk_data_dir = '/tmp/nltk_data'
 os.makedirs(nltk_data_dir, exist_ok=True)
 nltk.data.path.append(nltk_data_dir)
-
-# Download punkt if not already present
 nltk.download('punkt', download_dir=nltk_data_dir, quiet=True)
+
+import numpy as np
+import torch
+import pickle
+from gensim.models import KeyedVectors
 
 from training.fine_tuner import train_word2vec, extract_embeddings
 from data.data_loader import load_data
