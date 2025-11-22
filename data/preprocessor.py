@@ -8,7 +8,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 nltk.download("punkt")
 
 INPUT_DIR = "data/gutenberg_children"
-OUTPUT_FILE = "preprocessed_sentences.pkl"
+OUTPUT_FILE = "data/preprocessed_sentences.pkl"
 
 
 def clean_text(text):
