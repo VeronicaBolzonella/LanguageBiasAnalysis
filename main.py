@@ -4,6 +4,14 @@ import torch
 import pickle
 from gensim.models import KeyedVectors
 
+import os
+import nltk
+nltk_data_dir = '/tmp/nltk_data'
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+
+# Download punkt if not already present
+nltk.download('punkt', download_dir=nltk_data_dir, quiet=True)
 
 from training.fine_tuner import train_word2vec, extract_embeddings
 from data.data_loader import load_data
@@ -34,7 +42,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_folder", type=str, default="data/preprocessed_sentences.pkl", help="Path to the dataset")
     parser.add_argument("--vector_size", type=int, default=300, help="Size of embeddings")
-    parser.add_argument("--epochs", type=int, default=8, help="Number of epochs for training")
+    parser.add_argument("--epochs", type=int, default=50, help="Number of epochs for training")
+
+    nltk.download('punkt', download_dir='/tmp/nltk_data')
+    nltk.data.path.append('/tmp/nltk_data')
 
     args = parser.parse_args()
     main(epochs=args.epochs, vector_size=args.vector_size, folder=args.data_folder)
