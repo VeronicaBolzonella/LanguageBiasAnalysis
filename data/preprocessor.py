@@ -3,9 +3,11 @@ import re
 import pickle
 import nltk
 
-from nltk.tokenize import sent_tokenize, word_tokenize
-nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/'
+nltk_data_dir = '/vol/tensusers/vbolzonella/txmm'
 os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+nltk.download('punkt', download_dir=nltk_data_dir, quiet=True)
+nltk.download('punkt_tab', download_dir=nltk_data_dir, quiet=True)
 
 # Add to NLTK search paths
 nltk.data.path.append(nltk_data_dir)

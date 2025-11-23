@@ -4,13 +4,13 @@ from transformers import BertTokenizer
 from torch.utils.data import Dataset, DataLoader
 
 import nltk
-from nltk.tokenize import sent_tokenize
-from nltk.tokenize import sent_tokenize, word_tokenize
-nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/txmm_nltk'
-os.makedirs(nltk_data_dir, exist_ok=True)
 
-# Add to NLTK search paths
+nltk_data_dir = '/vol/tensusers/vbolzonella/txmm'
+os.makedirs(nltk_data_dir, exist_ok=True)
 nltk.data.path.append(nltk_data_dir)
+nltk.download('punkt', download_dir=nltk_data_dir, quiet=True)
+nltk.download('punkt_tab', download_dir=nltk_data_dir, quiet=True)
+
 
 def preprocess_text(text):
     """Clean and split text into sentences."""
