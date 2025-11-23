@@ -34,7 +34,7 @@ def main():
         start = 1              
         per_page = 25
         
-        while len(all_book_urls)<500:
+        while len(all_book_urls)<1500:
             if start == 1:
                 url = CATEGORY_URL
             else:
