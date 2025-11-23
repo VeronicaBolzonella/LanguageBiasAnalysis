@@ -5,14 +5,13 @@ from torch.utils.data import Dataset, DataLoader
 
 import nltk
 from nltk.tokenize import sent_tokenize
-nltk.download("punkt", quiet=True)
 
 def preprocess_text(text):
     """Clean and split text into sentences."""
     text = re.sub(r"<.*?>", "", text) # Remove HTML tags
     text = re.sub(r"[^a-zA-Z0-9.,!?' ]", "", text) # Remove special characters
     text = re.sub(r"\s+", " ", text).strip() # Normalize spaces
-    sentences = sent_tokenize(text) # Split into sentences
+    sentences = sent_tokenize(text) 
     return sentences
 
 
