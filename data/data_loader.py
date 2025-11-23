@@ -4,6 +4,7 @@ from transformers import BertTokenizer
 from torch.utils.data import Dataset, DataLoader
 
 import nltk
+from nltk import sent_tokenize, word_tokenize
 
 nltk_data_dir = '/vol/tensusers/vbolzonella/txmm'
 os.makedirs(nltk_data_dir, exist_ok=True)

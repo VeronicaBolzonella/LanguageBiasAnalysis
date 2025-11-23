@@ -2,6 +2,7 @@ import os
 import re
 import pickle
 import nltk
+from nltk import sent_tokenize, word_tokenize
 
 nltk_data_dir = '/vol/tensusers/vbolzonella/txmm'
 os.makedirs(nltk_data_dir, exist_ok=True)
