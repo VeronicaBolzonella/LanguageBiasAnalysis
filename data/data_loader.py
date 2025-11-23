@@ -5,6 +5,12 @@ from torch.utils.data import Dataset, DataLoader
 
 import nltk
 from nltk.tokenize import sent_tokenize
+from nltk.tokenize import sent_tokenize, word_tokenize
+nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/txmm_nltk'
+os.makedirs(nltk_data_dir, exist_ok=True)
+
+# Add to NLTK search paths
+nltk.data.path.append(nltk_data_dir)
 
 def preprocess_text(text):
     """Clean and split text into sentences."""

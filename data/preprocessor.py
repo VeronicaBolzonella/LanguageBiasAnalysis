@@ -4,6 +4,11 @@ import pickle
 import nltk
 
 from nltk.tokenize import sent_tokenize, word_tokenize
+nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/txmm_nltk'
+os.makedirs(nltk_data_dir, exist_ok=True)
+
+# Add to NLTK search paths
+nltk.data.path.append(nltk_data_dir)
 
 INPUT_DIR = "data/gutenberg_children"
 OUTPUT_FILE = "data/preprocessed.pkl"
