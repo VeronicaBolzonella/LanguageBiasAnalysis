@@ -4,7 +4,7 @@ import pickle
 import nltk
 
 from nltk.tokenize import sent_tokenize, word_tokenize
-nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/txmm_nltk'
+nltk_data_dir = '/vol/tensusers/vbolzonella/txmm/'
 os.makedirs(nltk_data_dir, exist_ok=True)
 
 # Add to NLTK search paths
