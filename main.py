@@ -43,9 +43,6 @@ if __name__ == "__main__":
     parser.add_argument("--vector_size", type=int, default=300, help="Size of embeddings")
     parser.add_argument("--epochs", type=int, default=50, help="Number of epochs for training")
     parser.add_argument("--workers", type=int, default=8, help="CPU cores to use")
-
-    nltk.download('punkt', download_dir='/tmp/nltk_data')
-    nltk.data.path.append('/tmp/nltk_data')
-
     args = parser.parse_args()
+    
     main(epochs=args.epochs, vector_size=args.vector_size, folder=args.data_folder, workers=args.workers)
