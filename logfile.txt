@@ -1,0 +1,6 @@
+Trained on 10 epochs.  Current total loss: 0.0000
+
+Embedding matrix: (298229, 100)
+Most similar to book:  [('books', 0.8231362104415894), ('manuscript', 0.8067801594734192), ('copy', 0.7919445633888245)]
+Most similar to home:  [('fairholm', 0.760515570640564), ('firgrove', 0.7351711988449097), ('maplebank', 0.723115861415863), ('willingham', 0.7109432220458984), ('seabay', 0.7034401893615723)]
+Most similar to boy:  [('lad', 0.8805509209632874), ('girl', 0.8226221799850464), ('fellow', 0.7719781398773193), ('youngster', 0.761631429195404), ('child', 0.7414506673812866)]
