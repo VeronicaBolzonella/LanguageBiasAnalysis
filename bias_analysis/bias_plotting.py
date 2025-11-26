@@ -16,7 +16,7 @@ def projection_on_axis(E, word, axis):
             v = E.get_vector(word)
             return np.dot(v, axis) / (np.linalg.norm(v) * np.linalg.norm(axis))
 
-def plot_profession_bias(E, axis, target_file):
+def plot_profession_bias(E, axis, target_file, bias):
     category_map = {
             "S": ("STEM", "#1f77b4"),
             "H": ("Doctors", "#ff7f0e"),
@@ -27,10 +27,11 @@ def plot_profession_bias(E, axis, target_file):
             "F": ("Service & Support", "#e377c2"),
             "C": ("Caregiving", "#7f7f7f")
         }
-
+    
     with open(target_file, "r") as f:
         # [(w, c)x N]
         target_words = json.load(f)
+
 
     w2c = {w: category_map[c] for w, c in target_words if w in E} 
     # eg 'writer': ('Arts, Design & Media', '#8c564b')
@@ -39,6 +40,13 @@ def plot_profession_bias(E, axis, target_file):
     sorted_targets = sorted(target_scores.items(), key=lambda x: x[1], reverse=True)
     words, scores = zip(*sorted_targets)
 
+    colors = []
+    # colors = ["#ff7f0e", "#7f7f7f", "#1f77b4", "#e377c2", "#2ca02c", "#9467bd", "#8c564b"]
+    plot_filtered(words, scores, w2c, colors, bias)
+
+
+
+def plot_filtered(words, scores, w2c, colors, bias):
     filtered_words = []
     filtered_scores = []
     filtered_colors = []
@@ -46,7 +54,8 @@ def plot_profession_bias(E, axis, target_file):
 
     for w, s in zip(words, scores):
         category, color = w2c[w]
-        if color !="#676767":
+
+        if color not in colors:
             filtered_words.append(w)
             filtered_scores.append(s)
             filtered_colors.append(color)
@@ -71,7 +80,7 @@ def plot_profession_bias(E, axis, target_file):
     plt.legend(handles=legend_handles, title="Category", loc='upper right')
 
     plt.tight_layout()
-    plt.savefig(f"data/results/output_professions_gender.png", dpi=300, bbox_inches="tight")
+    plt.savefig(f"data/results/output_AG.png", dpi=300, bbox_inches="tight")
     plt.show()
 
 

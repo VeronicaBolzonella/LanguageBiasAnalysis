@@ -47,4 +47,4 @@ if __name__ == "__main__":
     axis = we.doPCA(defs, E).components_[0]
 
 
-    plot_profession_bias(E, axis, target_file=target_file)
+    plot_profession_bias(E, axis, target_file, bias)
