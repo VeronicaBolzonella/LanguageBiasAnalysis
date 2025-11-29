@@ -2,6 +2,7 @@ from __future__ import print_function, division
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 import os
 
 def legent_handles(categories, colors):
@@ -13,10 +14,10 @@ def legent_handles(categories, colors):
                       for name, col in unique_legend.items()]
 
 def projection_on_axis(E, word, axis):
-            v = E.get_vector(word)
-            return np.dot(v, axis) / (np.linalg.norm(v) * np.linalg.norm(axis))
+    v = E.get_vector(word)
+    return np.dot(v, axis) / (np.linalg.norm(v) * np.linalg.norm(axis))
 
-def plot_profession_bias(E, axis, target_file, bias):
+def plot_profession_bias(E, axis, target_file, bias, revert, scale=1):
     category_map = {
             "S": ("STEM", "#1f77b4"),
             "H": ("Doctors", "#ff7f0e"),
@@ -36,17 +37,73 @@ def plot_profession_bias(E, axis, target_file, bias):
     w2c = {w: category_map[c] for w, c in target_words if w in E} 
     # eg 'writer': ('Arts, Design & Media', '#8c564b')
 
-    target_scores = {w: projection_on_axis(E, w, axis) for w in w2c}
-    sorted_targets = sorted(target_scores.items(), key=lambda x: x[1], reverse=True)
+    target_scores = {w: scale*projection_on_axis(E, w, axis) for w in w2c}
+    sorted_targets = sorted(target_scores.items(), key=lambda x: x[1], reverse=revert)
     words, scores = zip(*sorted_targets)
 
     colors = []
     # colors = ["#ff7f0e", "#7f7f7f", "#1f77b4", "#e377c2", "#2ca02c", "#9467bd", "#8c564b"]
-    plot_filtered(words, scores, w2c, colors, bias)
+    plot_filtered(words, scores, w2c, colors, bias, target="Professions")
+
+def plot_adjectives_bias(E, axis, target_file, bias, revert, scale=1):
+    category_map = {
+            "P": ("Positive", "#2ca02c"),
+            "N": ("Negative", "#d62728"),
+            "S": ("Neutral", "#676767")
+        }
+    
+    with open(target_file, "r") as f:
+        # [(w, c)x N]
+        target_words = json.load(f)
 
 
+    w2c = {w: category_map[c] for w, c in target_words if w in E} 
+    # eg 'writer': ('Arts, Design & Media', '#8c564b')
 
-def plot_filtered(words, scores, w2c, colors, bias):
+    target_scores = {w: scale*projection_on_axis(E, w, axis) for w in w2c}
+    sorted_targets = sorted(target_scores.items(), key=lambda x: x[1], reverse=revert)
+    words, scores = zip(*sorted_targets)
+
+    # colors = ["#676767"]
+    colors = []
+    plot_filtered(words, scores, w2c, colors, bias, target="Adj")
+
+
+def plot_animal_bias(E, axis, target_file, bias, revert, scale=1):
+    category_map_pp = { 
+            "P": ("Predator", "#d62728"),
+            "N": ("Neutral", "#1f77b4"),
+            "V": ("Prey", "#2ca02c")
+        }
+
+    category_map_size = { 
+            "B": ("Big", "#d62728"),
+            "S": ("Small", "#2ca02c"),
+            "M": ("Medium",  "#676767")
+        }
+    
+    with open(target_file, "r") as f:
+        # [(w, c)x N]
+        target_words = json.load(f)
+
+
+    w2c_pp = {w: category_map_pp[c_pp] for w, c_pp, c_size in target_words if w in E} 
+    # eg 'writer': ('Arts, Design & Media', '#8c564b')
+    w2c_size = {w: category_map_size[c_size] for w, c_pp, c_size in target_words if w in E} 
+
+    target_scores_pp = {w: scale*projection_on_axis(E, w, axis) for w in w2c_pp}
+    sorted_targets_pp = sorted(target_scores_pp.items(), key=lambda x: x[1], reverse=revert)
+    words_pp, scores_pp = zip(*sorted_targets_pp)
+
+    target_scores_size = {w: scale*projection_on_axis(E, w, axis) for w in w2c_size}
+    sorted_targets_size = sorted(target_scores_size.items(), key=lambda x: x[1], reverse=revert)
+    words_size, scores_size = zip(*sorted_targets_size)
+
+    colors = ["#676767"]
+    plot_filtered(words_pp, scores_pp, w2c_pp, colors, bias, target="Animals", i="PP")
+    plot_filtered(words_size, scores_size, w2c_size, colors, bias, target="Animals", i="Size")
+
+def plot_filtered(words, scores, w2c, colors, bias, target, i=None):
     filtered_words = []
     filtered_scores = []
     filtered_colors = []
@@ -72,20 +129,76 @@ def plot_filtered(words, scores, w2c, colors, bias):
     plt.ylim(-maxv - 0.1, maxv + 0.1)
 
     plt.xticks(rotation=90)
-    plt.ylabel(f"Axis Cosine Similarity")
-    plt.xlabel(f"Profession")
-    plt.title(f"Word Embeddings on Axis")
+    axis_name = get_axis_name(bias)
+    plt.ylabel(f"Projection on {bias} Bias Axis")
+    plt.xlabel(f"Profession, sorted {axis_name}")
+    plt.title(f"{target} word embeddings projected on {bias} axis")
 
     legend_handles = legent_handles(filtered_category_names, filtered_colors)    
-    plt.legend(handles=legend_handles, title="Category", loc='upper right')
+    plt.legend(handles=legend_handles, title="Category", loc='upper left')
 
     plt.tight_layout()
-    plt.savefig(f"data/results/output_AG.png", dpi=300, bbox_inches="tight")
+    if i is not None:
+        plt.savefig(f"data/results/{bias}_{target}_{i}_output_.png", dpi=300, bbox_inches="tight")
+    else:
+        plt.savefig(f"data/results/{bias}_{target}_output_.png", dpi=300, bbox_inches="tight")
+         
     plt.show()
 
+def get_axis_name(bias):
+    if bias == "Age":
+        return "from Young to Old"
+    elif bias == "Gender":
+        return "from He to She"
+    elif bias == "Class": 
+        return "from Poor to Rich"
+    
 
+def plot_on_vector_space(axis, target_file, E):
+    axis = np.array(axis)
 
-        
+    with open(target_file, "r") as f:
+        # [(w, c)x N]
+        target_words = json.load(f)
+        shape = len(target_words[0])
+    
+    if shape==3:
+        targets = [E.get_vector(w) for w, _, _ in target_words if w in E]
+    else:
+        targets = [E.get_vector(w) for w, _ in target_words if w in E]
+
+    # reduce to 2D
+    pca = PCA(n_components=2)
+    targets_tranformed = pca.fit_transform(targets)
+
+    # plot
+    plt.figure()
+    for t in targets_tranformed:
+        plt.scatter(t[0], t[1])
+
+    axis_vector = np.array(axis)
+
+    # Build two points: origin and axis direction
+    matrix = np.vstack([np.zeros_like(axis_vector), axis_vector])
+
+    # Reduce to 2D
+    pca = PCA(n_components=2)
+    reduced = pca.fit_transform(matrix)   # shape = (2,2)
+
+    x = reduced[:, 0]
+    y = reduced[:, 1]
+
+    # Plot line
+    plt.plot(x, y, marker='o')
+
+    plt.xlabel("PC1")
+    plt.ylabel("PC2")
+    plt.title("2D projection of embeddings")
+    plt.savefig(f"data/results/SCATTER.png", dpi=300, bbox_inches="tight")
+
+    plt.show()
+    
+
 
         
 
