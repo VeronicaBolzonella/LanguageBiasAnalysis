@@ -25,6 +25,8 @@ if __name__ == "__main__":
     else:
         raise ValueError
 
+    w = WordEmbedding(args.embedding_filename)
+
     # Convert to vector difference
     try:
         v = w[v_words[0]] - w[v_words[1]]   # vector difference
@@ -32,8 +34,6 @@ if __name__ == "__main__":
         raise ValueError(f"Word not in embedding: {e}")
 
     
-    w = WordEmbedding(args.embedding_filename)
-
     analogies = w.best_analogies_dist_thresh(v, topn=50)
 
     print(analogies)
