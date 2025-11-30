@@ -17,16 +17,23 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.bias == "age":
-        v = ("young", "old")
+        v_words = ("young", "old")
     elif args.bias == "gender":
-        v = ("she", "he")
+        v_words = ("she", "he")
     elif args.bias == "class": 
-        v = ("poor", "rich")
+        v_words = ("poor", "rich")
     else:
         raise ValueError
+
+    # Convert to vector difference
+    try:
+        v = w[v_words[0]] - w[v_words[1]]   # vector difference
+    except KeyError as e:
+        raise ValueError(f"Word not in embedding: {e}")
+
     
     w = WordEmbedding(args.embedding_filename)
 
-    analogies = w.best_analogies_dist_thresh(v)
+    analogies = w.best_analogies_dist_thresh(v, topn=50)
 
     print(analogies)
