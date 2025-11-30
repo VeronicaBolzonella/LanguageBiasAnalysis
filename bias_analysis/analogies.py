@@ -26,6 +26,7 @@ if __name__ == "__main__":
         raise ValueError
 
     E = KeyedVectors.load(args.embedding_filename)
+    w = WordEmbedding(E)
 
     # Convert to vector difference
     try:
@@ -34,6 +35,6 @@ if __name__ == "__main__":
         raise ValueError(f"Word not in embedding: {e}")
 
     
-    analogies = E.best_analogies_dist_thresh(v, topn=50)
+    analogies = w.best_analogies_dist_thresh(v, topn=50)
 
     print(analogies)
