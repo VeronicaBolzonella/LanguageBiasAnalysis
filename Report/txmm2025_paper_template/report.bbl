@@ -1,0 +1,245 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{20}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Adukia et~al\mbox{.}(2023)]%
+        {AdukiaEtAl2023}
+\bibfield{author}{\bibinfo{person}{Anjali Adukia}, \bibinfo{person}{Alex Eble}, \bibinfo{person}{Emileigh Harrison}, \bibinfo{person}{Hakizumwami~Birali Runesha}, {and} \bibinfo{person}{Teodora Szasz}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{What We Teach About Race and Gender: Representation in Images and Text of Children's Books}.
+\newblock \bibinfo{journal}{\emph{The Quarterly Journal of Economics}} \bibinfo{volume}{138}, \bibinfo{number}{4} (\bibinfo{year}{2023}), \bibinfo{pages}{2225--2285}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1093/qje/qjad028}
+\showDOI{\tempurl}
+
+
+\bibitem[Bolukbasi et~al\mbox{.}(2016)]%
+        {Bolukbasi}
+\bibfield{author}{\bibinfo{person}{Tolga Bolukbasi}, \bibinfo{person}{Kai-Wei Chang}, \bibinfo{person}{James~Y. Zou}, \bibinfo{person}{Venkatesh Saligrama}, {and} \bibinfo{person}{Adam~T. Kalai}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings}. In \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems 29 (NeurIPS 2016)}}.
+\newblock
+
+
+\bibitem[Bruni et~al\mbox{.}(2014)]%
+        {simi}
+\bibfield{author}{\bibinfo{person}{Elia Bruni}, \bibinfo{person}{Nam-Khanh Tran}, {and} \bibinfo{person}{Marco Baroni}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Multimodal Distributional Semantics}.
+\newblock \bibinfo{journal}{\emph{Journal of Artificial Intelligence Research}}  \bibinfo{volume}{49} (\bibinfo{year}{2014}), \bibinfo{pages}{1--47}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1613/jair.4135}
+\showDOI{\tempurl}
+
+
+\bibitem[Caliskan et~al\mbox{.}(2022)]%
+        {adjbias}
+\bibfield{author}{\bibinfo{person}{Aylin Caliskan}, \bibinfo{person}{Pimparkar~Parth Ajay}, \bibinfo{person}{Tessa Charlesworth}, \bibinfo{person}{Robert Wolfe}, {and} \bibinfo{person}{Mahzarin~R. Banaji}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Gender Bias in Word Embeddings: A Comprehensive Analysis of Frequency, Syntax, and Semantics}. In \bibinfo{booktitle}{\emph{Proceedings of the 2022 AAAI/ACM Conference on AI, Ethics, and Society}} (Oxford, United Kingdom) \emph{(\bibinfo{series}{AIES '22})}. \bibinfo{publisher}{Association for Computing Machinery}, \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{156--170}.
+\newblock
+\showISBNx{9781450392471}
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3514094.3534162}
+\showDOI{\tempurl}
+
+
+\bibitem[Caliskan et~al\mbox{.}(2017)]%
+        {cali}
+\bibfield{author}{\bibinfo{person}{Aylin Caliskan}, \bibinfo{person}{Joanna~J. Bryson}, {and} \bibinfo{person}{Arvind Narayanan}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Semantics derived automatically from language corpora contain human-like biases}.
+\newblock \bibinfo{journal}{\emph{Science}} \bibinfo{volume}{356}, \bibinfo{number}{6334} (\bibinfo{year}{2017}), \bibinfo{pages}{183--186}.
+\newblock
+
+
+\bibitem[Child et~al\mbox{.}(1946)]%
+        {submissive}
+\bibfield{author}{\bibinfo{person}{I.~L. Child}, \bibinfo{person}{E.~H. Potter}, {and} \bibinfo{person}{E.~M. Levine}.} \bibinfo{year}{1946}\natexlab{}.
+\newblock \showarticletitle{Children's Textbooks and Personality Development: An Exploration in the Social Psychology of Education}.
+\newblock \bibinfo{journal}{\emph{Psychological Monographs}}  \bibinfo{volume}{60} (\bibinfo{year}{1946}), \bibinfo{pages}{1--144}.
+\newblock
+
+
+\bibitem[Eagly et~al\mbox{.}(1991)]%
+        {wonderwoman}
+\bibfield{author}{\bibinfo{person}{Alice~H. Eagly}, \bibinfo{person}{Antonio Mladinic}, {and} \bibinfo{person}{Stacey Otto}.} \bibinfo{year}{1991}\natexlab{}.
+\newblock \showarticletitle{Are women evaluated more favorably than men? An analysis of attitudes, beliefs, and emotions}.
+\newblock \bibinfo{journal}{\emph{Psychology of Women Quarterly}}  \bibinfo{volume}{15} (\bibinfo{year}{1991}), \bibinfo{pages}{203--216}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1111/j.1471-6402.1991.tb00792.x}
+\showDOI{\tempurl}
+
+
+\bibitem[Foundation(1971)]%
+        {gutenberg}
+\bibfield{author}{\bibinfo{person}{Project Gutenberg Literary~Archive Foundation}.} \bibinfo{year}{1971}\natexlab{}.
+\newblock \bibinfo{title}{Project Gutenberg}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.gutenberg.org/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[FreeStoriesForKids.com(2008)]%
+        {btstories}
+\bibfield{author}{\bibinfo{person}{FreeStoriesForKids.com}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \bibinfo{title}{FreeStoriesForKids}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://freestoriesforkids.com/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Grimm and Grimm(1812)]%
+        {princefrog}
+\bibfield{author}{\bibinfo{person}{Jacob Grimm} {and} \bibinfo{person}{Wilhelm Grimm}.} \bibinfo{year}{1812}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Frog Prince (Der Froschkönig / Iron Henry)}}.
+\newblock \bibinfo{publisher}{Realschulbuchhandlung}.
+\newblock
+
+
+\bibitem[Halliwell-Phillipps(1886)]%
+        {3pigs}
+\bibfield{author}{\bibinfo{person}{James~Orchard Halliwell-Phillipps}.} \bibinfo{year}{1886}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Three Little Pigs}}.
+\newblock \bibinfo{publisher}{London: John C. Nimmo}.
+\newblock
+
+
+\bibitem[Harlin and Morgan(2009)]%
+        {HarlinMorgan2009}
+\bibfield{author}{\bibinfo{person}{Rebecca Harlin} {and} \bibinfo{person}{Hani Morgan}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Review of Research: Gender, Racial and Ethnic Misrepresentation in Children's Books: A Comparative Look}.
+\newblock \bibinfo{journal}{\emph{Childhood Education}} \bibinfo{volume}{85}, \bibinfo{number}{3} (\bibinfo{year}{2009}).
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1080/00094056.2009.10521389}
+\showDOI{\tempurl}
+
+
+\bibitem[Massman(1979)]%
+        {Massman1979}
+\bibfield{author}{\bibinfo{person}{J.L. Massman}.} \bibinfo{year}{1979}\natexlab{}.
+\newblock \showarticletitle{Animal Stereotypes in Children's Picture Books}.
+\newblock  (\bibinfo{year}{1979}).
+\newblock
+\urldef\tempurl%
+\url{https://scholarworks.uni.edu/cgi/viewcontent.cgi?article=4820\&context=grp}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{Article from University of Northern Iowa ScholarWorks}.
+
+
+\bibitem[McCabe et~al\mbox{.}(2011)]%
+        {animal_most}
+\bibfield{author}{\bibinfo{person}{Janice McCabe}, \bibinfo{person}{Emily Fairchild}, \bibinfo{person}{Liz Grauerholz}, \bibinfo{person}{Bernice~A. Pescosolido}, {and} \bibinfo{person}{Daniel Tope}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Gender in Twentieth-Century Children's Books: Patterns of Disparity in Titles and Central Characters}.
+\newblock \bibinfo{journal}{\emph{Gender \& Society}} \bibinfo{volume}{25}, \bibinfo{number}{2} (\bibinfo{year}{2011}), \bibinfo{pages}{197--226}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1177/0891243211398358}
+\showDOI{\tempurl}
+
+
+\bibitem[of~Labor(2020)]%
+        {occu}
+\bibfield{author}{\bibinfo{person}{U.S.~Department of Labor}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{title}{Occupations of Women in the Labor Force Since 1920}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.dol.gov/agencies/wb/data/occupations-decades-100}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Potter(1902)]%
+        {peter}
+\bibfield{author}{\bibinfo{person}{Beatrix Potter}.} \bibinfo{year}{1902}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Tale of Peter Rabbit}}.
+\newblock \bibinfo{publisher}{Frederick Warne \& Co.}
+\newblock
+
+
+\bibitem[Potter(1906)]%
+        {jeremy}
+\bibfield{author}{\bibinfo{person}{Beatrix Potter}.} \bibinfo{year}{1906}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The Tale of Mr. Jeremy Fisher}}.
+\newblock \bibinfo{publisher}{Frederick Warne \& Co.}
+\newblock
+
+
+\bibitem[Raza et~al\mbox{.}(2023)]%
+        {nbias}
+\bibfield{author}{\bibinfo{person}{Shaina Raza}, \bibinfo{person}{Muskan Garg}, \bibinfo{person}{Deepak~John Reji}, \bibinfo{person}{Syed~Raza Bashir}, {and} \bibinfo{person}{Chen Ding}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{\{NBIAS\}: A Natural Language Processing Framework for Bias Identification in Text}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2308.01681}} (\bibinfo{year}{2023}).
+\newblock
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2308.01681}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Walsh(2025)]%
+        {Walsh2025}
+\bibfield{author}{\bibinfo{person}{Melanie Walsh}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{The Sneaky Gender Bias in Picture Books: Animal Characters}.
+\newblock \bibinfo{journal}{\emph{Publishers Weekly}} (\bibinfo{date}{aug} \bibinfo{year}{2025}).
+\newblock
+\urldef\tempurl%
+\url{https://www.publishersweekly.com/pw/by-topic/children/childrens-industry-news/article/98304-the-sneaky-gender-bias-in-picture-books-animal-characters.html}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{Web exclusive article, August 05 2025}.
+
+
+\bibitem[Wood(2025)]%
+        {predators}
+\bibfield{author}{\bibinfo{person}{Lara~A. Wood}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{Mr Predator and Mrs Prey: gender stereotypes in children's films correlate with explicit and implicit gender stereotyping}.
+\newblock \bibinfo{journal}{\emph{Social Development}} \bibinfo{volume}{34}, \bibinfo{number}{3} (\bibinfo{year}{2025}).
+\newblock
+
+
+\end{thebibliography}

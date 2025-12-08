@@ -8,6 +8,17 @@ embeddings.kv.vectors.npy
 embeddings_local.kv
 embeddings_local.kv.vectors.npy
 data/results
+embeddings_new.kv
+embeddings_new.kv.vectors.npy
+new_embeddings.kv
+new_embeddings.kv.vectors.npy
+data/freestories_children/
+data/gutenberg_children_plus/
+data/tests/
+data/terms/sadjectives.json
+data/terms/sanimals.json
+data/terms/sprofessions.json
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
