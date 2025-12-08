@@ -2,6 +2,7 @@ from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec 
 from gensim.test.utils import datapath
 from gensim import utils
+from gensim.models import KeyedVectors
 
 import os
 import logging
@@ -63,3 +64,34 @@ def train_word2vec(sentences, vector_size=100, window=5, min_count=2, workers=8,
     logging.info("Training complete.")
 
     return model
+
+def fine_tune_w2v(E_filename, new_sentences, epochs=10):
+    kv = KeyedVectors.load(E_filename, mmap='r')
+
+    model = Word2Vec(
+        vector_size=kv.vector_size,
+        min_count=1,
+        sg=1,                  
+        window=5,              
+        workers=15
+    )
+
+    model.build_vocab([kv.index_to_key], update=False)
+
+    # 4. Inject the old weights
+    model.wv.vectors[:] = kv.vectors
+
+    # continue training on new sentences
+    model.build_vocab(new_sentences, update=True)
+    model.train(
+            corpus_iterable=new_sentences,
+            total_examples=model.corpus_count, 
+            epochs=epochs,
+            callbacks=[EpochLogger()] 
+        )
+    model.wv.save("finetuned_embeddings.kv")
+
+    logging.info("Training complete.")
+
+    return model
+

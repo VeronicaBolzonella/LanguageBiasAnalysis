@@ -14,9 +14,9 @@ import numpy as np
 import pickle
 
 from training.fine_tuner import MyCorpus
-from training.fine_tuner import train_word2vec
+from training.fine_tuner import train_word2vec, fine_tune_w2v
 
-def main(epochs=10, vector_size:int=300, workers=8, folder:str="data/gutenberg_children"):
+def main_train(epochs=10, vector_size:int=100, workers=12, folder:str="data/gutenberg_children_plus", output_filename:str="new_embeddings.kv"):
     sentences = MyCorpus(folder)
 
     # Train
@@ -32,16 +32,32 @@ def main(epochs=10, vector_size:int=300, workers=8, folder:str="data/gutenberg_c
     print("Most similar to boy: ", model.wv.most_similar("boy", topn=5))
 
     # Save vectors
+    model.wv.save("embeddings_new.kv")
+
+def main_finetune(E:str="ebeddings_local.kv", epochs=10, workers=15, folder:str="data/freestories_children"):
+    sentences = MyCorpus(folder)
+
+    # Train
+    model = fine_tune_w2v(E, new_sentences=sentences, epochs=epochs)
+
+    # Get embedding matrix
+    vectors = model.wv.vectors
+
+    print(vectors.shape)
+    print("Most similar to book: ", model.wv.most_similar("book", topn=3))
+    print("Most similar to home: ", model.wv.most_similar("home", topn=5))
+    print("Most similar to boy: ", model.wv.most_similar("boy", topn=5))
+
+    # Save vectors
     model.wv.save("embeddings.kv")
 
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_folder", type=str, default="data/gutenberg_children", help="Path to the dataset")
-    parser.add_argument("--vector_size", type=int, default=100, help="Size of embeddings")
-    parser.add_argument("--epochs", type=int, default=10, help="Number of epochs for training")
-    parser.add_argument("--workers", type=int, default=15, help="CPU cores to use")
+    parser.add_argument("--embeddings_dir", type=str, default="embeddings_local.kv", help="Path to the embeddings")
+    parser.add_argument("--data_folder", type=str, default="data/gutenberg_children_plus", help="Path to the dataset")
+    parser.add_argument("--epochs", type=int, default=8, help="Number of epochs for training")
     args = parser.parse_args()
 
-    main(epochs=args.epochs, vector_size=args.vector_size, folder=args.data_folder, workers=args.workers)
+    main_train(epochs=args.epochs, folder=args.data_folder)

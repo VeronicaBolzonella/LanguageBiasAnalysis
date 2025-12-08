@@ -26,7 +26,7 @@ def plot_profession_bias(E, axis, target_file, bias, revert, scale=1):
             "E": ("Education and Academia", "#9467bd"),
             "A": ("Arts, Design & Media", "#8c564b"),
             "F": ("Service & Support", "#e377c2"),
-            "C": ("Caregiving", "#7f7f7f")
+            "C": ("Caregiving", "#2600ff")
         }
     
     with open(target_file, "r") as f:
@@ -66,7 +66,7 @@ def plot_adjectives_bias(E, axis, target_file, bias, revert, scale=1):
 
     # colors = ["#676767"]
     colors = []
-    plot_filtered(words, scores, w2c, colors, bias, target="Adj")
+    plot_filtered(words, scores, w2c, colors, bias, target="Adjectives")
 
 
 def plot_animal_bias(E, axis, target_file, bias, revert, scale=1):
@@ -128,20 +128,26 @@ def plot_filtered(words, scores, w2c, colors, bias, target, i=None):
     maxv = np.max(np.abs(scores))
     plt.ylim(-maxv - 0.1, maxv + 0.1)
 
-    plt.xticks(rotation=90)
+    plt.xticks(rotation=90, fontsize=14)
     axis_name = get_axis_name(bias)
-    plt.ylabel(f"Projection on {bias} Bias Axis")
-    plt.xlabel(f"Profession, sorted {axis_name}")
-    plt.title(f"{target} word embeddings projected on {bias} axis")
+    plt.ylabel(f"Projection on {bias} Bias Axis", fontsize=14)
+    plt.xlabel(f"Profession, sorted {axis_name}", fontsize=14)
+    plt.title(f"{target} word embeddings projected on {bias} axis", fontsize=14)
 
     legend_handles = legent_handles(filtered_category_names, filtered_colors)    
-    plt.legend(handles=legend_handles, title="Category", loc='upper left')
-
+    plt.legend(
+        handles=legend_handles,
+        title="Category",
+        loc="upper left",
+        bbox_to_anchor=(1.02, 1),
+        fontsize=14,
+        title_fontsize=14
+    )
     plt.tight_layout()
     if i is not None:
-        plt.savefig(f"data/results/{bias}_{target}_{i}_output_.png", dpi=300, bbox_inches="tight")
+        plt.savefig(f"data/results/{bias}_{target}_{i}_output_.png", dpi=600, bbox_inches="tight")
     else:
-        plt.savefig(f"data/results/{bias}_{target}_output_.png", dpi=300, bbox_inches="tight")
+        plt.savefig(f"data/results/{bias}_{target}_output_.png", dpi=600, bbox_inches="tight")
          
     plt.show()
 
@@ -153,52 +159,6 @@ def get_axis_name(bias):
     elif bias == "Class": 
         return "from Poor to Rich"
     
-
-def plot_on_vector_space(axis, target_file, E):
-    axis = np.array(axis)
-
-    with open(target_file, "r") as f:
-        # [(w, c)x N]
-        target_words = json.load(f)
-        shape = len(target_words[0])
-    
-    if shape==3:
-        targets = [E.get_vector(w) for w, _, _ in target_words if w in E]
-    else:
-        targets = [E.get_vector(w) for w, _ in target_words if w in E]
-
-    # reduce to 2D
-    pca = PCA(n_components=2)
-    targets_tranformed = pca.fit_transform(targets)
-
-    # plot
-    plt.figure()
-    for t in targets_tranformed:
-        plt.scatter(t[0], t[1])
-
-    axis_vector = np.array(axis)
-
-    # Build two points: origin and axis direction
-    matrix = np.vstack([np.zeros_like(axis_vector), axis_vector])
-
-    # Reduce to 2D
-    pca = PCA(n_components=2)
-    reduced = pca.fit_transform(matrix)   # shape = (2,2)
-
-    x = reduced[:, 0]
-    y = reduced[:, 1]
-
-    # Plot line
-    plt.plot(x, y, marker='o')
-
-    plt.xlabel("PC1")
-    plt.ylabel("PC2")
-    plt.title("2D projection of embeddings")
-    plt.savefig(f"data/results/SCATTER.png", dpi=300, bbox_inches="tight")
-
-    plt.show()
-    
-
 
         
 

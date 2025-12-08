@@ -118,7 +118,7 @@ if __name__=="__main__":
 
     similarity_df = create_similarity_dataframe(file_to_process)
 
-    embeddings = KeyedVectors.load("embeddings.kv")
+    embeddings = KeyedVectors.load("embeddings_local.kv")
     
     df = calculate_df_similarity(similarity_df, embeddings)
 

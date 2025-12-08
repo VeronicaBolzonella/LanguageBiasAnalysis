@@ -3,13 +3,14 @@ import time
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 import pandas as pd
+import re
 
-DOWNLOAD_DIR = "data/gutenberg_children"
-LOG_FILE = os.path.join(DOWNLOAD_DIR, "log.txt")
+METADATA_DIR = "data/gutenberg_children"
+LOG_FILE = os.path.join(METADATA_DIR, "log.txt")
 BASE_URL = "https://www.gutenberg.org"
 CATEGORY_URL = "https://www.gutenberg.org/ebooks/bookshelf/636"  # Children and Young Adults
 
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+os.makedirs(METADATA_DIR, exist_ok=True)
 
 def log(message):
     """Write message to both console and log file."""
@@ -35,7 +36,7 @@ def main():
         start = 1              
         per_page = 25
         
-        while len(all_book_urls)<2:
+        while len(all_book_urls)<3000:
             if start == 1:
                 url = CATEGORY_URL
             else:
@@ -78,6 +79,8 @@ def main():
         ids = [i for i in range(len(all_book_urls))]
 
         for i, url in enumerate(sorted(all_book_urls), start=1):
+            author = None
+            year = None
             try:
                 page.goto(url)
                 time.sleep(2)
@@ -85,16 +88,47 @@ def main():
                 # Gather metadata
                 author_el = page.query_selector('tr:has(th:text("Author")) td')
                 author = author_el.inner_text().strip() if author_el else None
+                parts = author.split(",")[:2]   
+                author = ", ".join(parts)  # join back if needed
+                print(author)
 
-                df.loc[len(df)] = [i, author, None]
+                wiki_el = page.query_selector('a[href*="wikipedia.org"]')
+                year = None
+                if wiki_el:
+                    wiki_href = wiki_el.get_attribute("href")
+                    if wiki_href:
+                        # Go to Wikipedia page
+                        page.goto(wiki_href)
+                        page.wait_for_load_state("networkidle")
+                        time.sleep(1)
+
+                        # Try to extract publication date from infobox
+                        pub_el = page.query_selector('table.infobox th:has-text("Publication date") + td')
+                        if pub_el:
+                            pub_text = pub_el.inner_text().strip()
+                            # Extract year if possible
+                            match = re.search(r"\b(\d{4})\b", pub_text)
+                            if match:
+                                year = int(match.group(1))
+                            print(year)
+
+                df.loc[len(df)] = [i, author, year]
 
 
                 
             except Exception as e:
                 log(f"Error on book {i} ({url}): {e}")
+            finally:
+                # Always add a row, even if author/year is None
+                df.loc[len(df)] = [i, author, year]
 
         browser.close()
         log("Complete")
+
+        print(df)
+        json_file = os.path.join(METADATA_DIR, "books_metadata.json")
+        df.to_json(json_file, orient="records", force_ascii=False, indent=4)
+        log(f"Data saved to {json_file}")
 
 if __name__ == "__main__":
     main()

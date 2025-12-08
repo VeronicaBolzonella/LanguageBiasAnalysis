@@ -167,7 +167,7 @@ class WordEmbedding:
         words = [w for w, dot in zip(self.words, dots) if dot>=thresh]
         return sorted(words, key=lambda w: self.v(w).dot(v))[-topn:][::-1]
 
-    def best_analogies_dist_thresh(self, v, thresh=1, topn=500, max_words=50000):
+    def best_analogies_dist_thresh(self, v, thresh=1, topn=50, max_words=50000):
         """Metric is cos(a-c, b-d) if |b-d|^2 < thresh, otherwise 0
         """
         vecs, vocab = self.vecs[:max_words], self.words[:max_words]
