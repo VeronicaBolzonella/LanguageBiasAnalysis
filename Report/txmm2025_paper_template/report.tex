@@ -66,12 +66,12 @@
 
 
 \renewcommand{\shortauthors}{Veronica Bolzonella}
-\renewcommand{\shorttitle}{Bias in Children Books}
+\renewcommand{\shorttitle}{Bias in Children's Books}
 
 \begin{abstract}
-We analyze gender, age, and socioeconomic bias in the perception of professions, animals and adjectives in classic children books. 
+We analyze gender, age, and socioeconomic bias in the perception of animals, professions and adjectives in classic children's books. 
 We demonstrate a strong bias against women in professions, in the form of under-representation, especially in professions associated with positions of power. We also show a bias in animals of large size being perceived more as male and rich.
-Moreover we demonstrate a strong aporophobia in adjectives, with the vast majority of positive adjective scoring high similarity with the "rich" direction, and negative adjectives scoring high similarity with the "poor" direction.
+Moreover, we demonstrate a strong aporophobia in adjectives, with the vast majority of positive adjectives being associated with "rich" direction, and negative adjectives being associated with "poor".
 Finally, we report that modern stories aimed at transmitting positive values show a reduction in aporophobia, and a reduction in sexism and reverse ageism in professions and animals perception. However, we report an increase in gender and age bias in the use of adjectives, seeing a stronger polarization of these towards one or the other direction of the  bias axis. 
 
 \end{abstract}
@@ -80,17 +80,19 @@ Finally, we report that modern stories aimed at transmitting positive values sho
 
 \section{Introduction}
 \label{sec:intro}
-The bias in language that children are exposed contributes to the establishment of often discriminatory stereotypes. 
-Exposing bias in children literature holds value as a form of understanding and evaluating the education of children, and 
-consider bias accordingly in conversation and educational contexts.
-In this project we expose gender, age and socioeconomic bias present in classic chidren books.
-It is also interesting to explore how these biases changed in time, and evaluate if new generations are exposed to less, more or different biases. 
+The bias in language that children are exposed to contributes to the establishment of often discriminatory stereotypes. 
+Exposing bias in children's literature holds value as a form of understanding and evaluating the education of children, and 
+considering bias accordingly in conversation and educational contexts.
+In this project, we expose gender, age, and socioeconomic bias present in classic chidren books.
+It is also interesting to explore how these biases changed in time, and evaluate if new generations are exposed to fewer, more, or different biases. 
 
 To these ends, we aim to answer the following research questions:
 
-What patterns can be found in the gender, age and socioeconomic bias in children books across words for professions, animals and adjectives?
 
-Is there evidence of a change in these patterns in modern children stories?
+What patterns can be found in the gender, age, and socioeconomic bias in children's books across words for professions, animals and adjectives?
+
+
+Is there evidence of a change in these patterns in modern children's stories?
 
 
 We hypothesize that classic books present strong gender bias against women, reverse ageism (bias against young people), 
@@ -100,53 +102,55 @@ We also hypothesize a reduction in all biases in the extended dataset.
 \section{Related Work}
 \label{sec:work}
 
-The method utilized in this project is inspired on that of Bolukbasi et al. \cite{Bolukbasi}, 
-where the bias is quantified in relation to the location of words on the vector space of a custom trained Word2vec model.
-While \cite{Bolukbasi} offers a framework to identify and remove bias from the model, this project in not concerned with the latter task. 
+The method utilized in this project is based on that of Bolukbasi et al. \cite{Bolukbasi}, 
+where the bias is quantified in relation to the location of words on the vector space of a custom-trained Word2vec model.
+While \cite{Bolukbasi} offers a framework to identify and remove bias from the model, this project is not concerned with the latter task. 
 Other methods have been designed for the purpose of bias identification, such as NBIAS \cite{nbias}. However, our method
-is advantaged over that of NBIAS in the way that it does not require annotation of text, which is a costly process. 
+is advantageous over that of NBIAS in that it does not require annotation of text, which is a costly process. 
 Caliskan \cite{cali} proposes another method, Word Embedding Association Test (WEAT), to quantify bias in word embeddings. 
-However WEAT focuses on relative bias between two groups, and is not suitable for measuring global presence of bias in a corpus.
+However, WEAT focuses on relative bias between two groups, and is not suitable for measuring the global presence of bias in a corpus.
 
 In successive work, Caliskan also extends the analysis of gender bias in embeddings with statistical methods, POS analysis, and cluster analysis \cite{adjbias}. 
-For purpuse of simplicity, interpretability and generalizability of our results, we limit our method to that of embeddings projections 
+For the purpose of simplicity, interpretability, and generalizability of our results, we limit our method to that of embedding projections 
 on a bias axis, as done by Bolukbasi et al \cite{Bolukbasi}.
 
 We contribute to the field of bias identification by analyzing the gender, age, and socioeconomic bias in professions, 
 adjectives, and animals perceptions, in children’s literature.
-These analysis will be performed in an analogous method to that of \cite{Bolukbasi}, aplpied to sets of target words and axis pairs in all fields above mentioned.
+These analyses will be performed in an analogous method to that of \cite{Bolukbasi}, applied to sets of target words and axis pairs in all fields mentioned above.
 
-Moreover, we extend the method by comparing bias in different periods of time, more specifically that of classic books, written between the years 1765 and 1963, and
+Moreover, we extend the method by comparing the bias in different periods of time, more specifically, that of classic books, written between the years 1765 and 1963, and
 that of modern stories written in the 21st century.
 This is done using the magnitude of vectors' shift towards a perpendicular or parallel direction to the bias axis after finetuning the model with 
 modern stories. 
 
-The results will be compared with experts’ findings on animal stereotypes in children books \cite{Massman1979, Walsh2025} and movies \cite{predators},
-reports on wemen and youth misrepresentation \cite{HarlinMorgan2009, animal_most, AdukiaEtAl2023}. 
+The results will be compared with experts’ findings on animal stereotypes in children's books \cite{Massman1979, Walsh2025} and movies \cite{predators}, and
+reports on women and youth misrepresentation \cite{HarlinMorgan2009, animal_most, AdukiaEtAl2023}. 
 
 \section{Method}
 \label{sec:approach}
-A Word2Vec model is trained with 3021 classic children books obtained by crawling the Children and Young Adults category in the Gutenberg Project \cite{gutenberg}.
-The books are published between 1765 and 1963, and collectively written by over 1000 authors.
+A Word2Vec model is trained with 3021 classic children's books obtained by crawling the Children and Young Adults category in the Gutenberg Project \cite{gutenberg}.
+The books were published between 1765 and 1963, and collectively written by over 1000 authors.
 
 The embeddings are validated against manually labelled scores from the dataset in \cite{simi}.
-This dataset contains pairs (e.g. "sun" and "sunshine"), and a score on a 50 point scale assessing the similarity of the terms (where 50 indicates identical terms). 
+This dataset contains pairs (e.g., "sun" and "sunshine"), and a score on a 50 point scale assessing the similarity of the terms (where 50 indicates identical terms). 
 We assess the validity of the Word2Vec model as the Pearson Correlation Coefficient between the similarity labels from the 
 validation set  and the cosine similarity calculated on the embeddings as $1-cosine(\vec{w_1}, \vec{w_2})$. Our trained models 
 achieved a coefficient above 0.7 with high statistical significance.
+
 The bias analysis will be performed using the following method.
 The projection (cosine similarity) of words in the categories of interest (professions, animals, adjectives) is quantified 
-against the bias axis.
+against each bias axis.
 
-Each word achieves a score between -1 and +1, indicating association with one or the other direction of the bias axis. 
-In particular, for each axis negative scores indicate respective association with "she", "young" and "poor".
+For each bias, target words achieve a score between -1 and +1, indicating an association with one or the other direction of the bias axis. 
+In particular, for each axis, negative scores indicate an association with "she", "young", and "poor", and positive scores with 
+respectively "he", "old/adult", "rich".
 
-The bias axis are made more stable by taking an average of a number of possible directions between word couples representing this bias. 
-For example the gender axis is found by averaging the directions between pairs "he, she", "man, woman", "boy, girl", etc. 
+The bias axes are made more stable by taking an average of a number of possible directions between word couples representing this bias. 
+For example, the gender axis is found by averaging the directions between pairs "he, she", "man, woman", "boy, girl", etc. 
 The axis pairs are created manually, in collaboration with 3 annotators who proposed and selected the most representative 
 pairs for each bias. The complete lists of axis pairs can be found in Appendix \ref{sec:pairs}.
 
-A second Word2Vec model is then finetuned with 304 additional stories from the database Bedtime Stories \cite{btstories}, 
+A second Word2Vec model is finetuned with 304 additional stories from the database Bedtime Stories \cite{btstories}, 
 which features modern stories for children with the aim of enforcing positive values.
 
 The same scores are obtained for the new embeddings, and the shift is quantified by measuring the difference in scores 
@@ -158,9 +162,9 @@ The category labels were obtained by taking the majority label out of 3 annotato
  
 \subsubsection{Professions}
 
-This category includes 95 professions with no definitional gender. The list does not include terms which are associated 
-with a gender by their grammatical or syntactical form, such as "business woman" or "actress". Words with a stereotypical 
-gender association, such "nurse" or "president" are included.
+This category includes 95 professions with no definitional gender: the list does not include terms that are associated 
+with a gender by their grammatical or syntactical form, such as "businesswoman" or "actress". Words with a stereotypical 
+gender association, such as "nurse" or "president", are included.
 
 Professions are divided into the following categories:
 \begin{itemize}
@@ -170,28 +174,28 @@ Professions are divided into the following categories:
     \item Government and Law, such as 'president', 'ambassador', 'lawyer'.
     \item Education and Academia, such as 'professor', 'philosopher', 'librarian'.
     \item Art, Media, and Entertainment, such as 'writer', 'dancer', 'singer'.
-    \item Service and Support, such as 'driver', 'janitor', 'barber'
+    \item Service and Support, such as 'driver', 'janitor', 'barber'.
     \item Caregiving and Household, such as 'nanny', 'housekeeper', 'maid'.
 \end{itemize}
 
 \subsubsection{Animals}
-Animals are an important presence in children stories. For example, think of the iconic 
+Animals are an important presence in children's stories. For example, think of the iconic 
 characters in The Three Little Pigs \cite{3pigs} or The Tale of Peter Rabbit \cite{peter}. This is because animals, 
 apart from stimulating children's imagination, also form a diverse and cross-cultural characters group, making it easier
 for writers to create inclusive characters that are easy to relate to by children across different social groups. 
-Nonetheless the use of certain animals is often tied to anthropomorphism,  the attribution of human traits and emotions 
-to non-human entities. While animals are used for their diversity and inclusivity, these antromorphisms can 
+Nonetheless, the use of certain animals is often tied to anthropomorphism,  the attribution of human traits and emotions 
+to non-human entities. While animals are used for their diversity and inclusivity, these anthropomorphisms can 
 still subtly result in children unconsciously learning wrongful associations. 
-For example, the authors in \cite{animal_most} find that animals are the most unequal group among those studies in terms of gender representation.
+For example, McCabe et al. \cite{animal_most} find that animals are the most unequal group among those studied in terms of gender representation.
 
-The target words include 74 animals, classified into Pray, Predator, or Neutral, and in Big, Medium or Small. Notice 
-that the animals do not need to be definitionally part of the category, but must be sentimentally. What we mean is that an animal such as "ant" is categorized as a neutral, even if it can be biologically defined as a predator. 
-This is because ants are not stereotypically considered predators, hence the readers sentiment towards ants is not that of a predator.
+The target words include 74 animals, classified into Prey, Predator, or Neutral, and in Big, Medium, or Small. Notice 
+that the animals do not need to be definitionally part of the category, but must be sentimentally. What we mean is that an animal such as "ant" is categorized as neutral, even if it can be biologically defined as a predator. 
+This is because ants are not stereotypically considered predators as characters in stories, hence the reader's sentiment towards ants is not that of a predator.
 Finally, notice that some animals have a definitional gender (e.g., cow), but are still included in the list as these 
-animals are common in children stories and can be insightful across other bias axes.
+animals are common in children's stories and can be insightful across other bias axes.
 
 \subsubsection{Adjectives}
-This list includes 136 adjective that can be used to describe a person, such as 'active', 'charming', 'beautiful'. These are classified as Positive, Neutral, and Negative.
+This list includes 136 adjectives that can be used to describe a person, such as 'active', 'charming', 'beautiful'. These are classified as Positive, Neutral, and Negative.
 
 \begin{figure*}
     \centering
@@ -200,7 +204,7 @@ This list includes 136 adjective that can be used to describe a person, such as 
     \descriptionlabel{On the vertical axis the projection between -1 (identical direction to 'poor') and +1 (identical direction to 'rich), on the horizontal axis, some of the words in the adjectives target group, classified as positive (green) or negative (red).}
     \label{fig:class_adj}
 \end{figure*}
-
+%TODO add example of interpretation
 
 \begin{figure*}
     \centering
@@ -214,46 +218,52 @@ This list includes 136 adjective that can be used to describe a person, such as 
 
 
 \section{Results and Analysis}
-Note that the following report only includes significant findings, and excludes discussion of targets and bias for which no strong results were found.
+\label{sec:results}
 
+Note that the following report only includes significant findings, and excludes discussion of targets and bias for which no strong results were found.
+All scores and relevant graphs can be found in Appendix \ref{sec:scores} and \ref{sec:graphs}.
 \subsection{Gender Bias}
 \subsubsection{Gender bias in professions}
 Our findings suggest a strong gender bias in professions. The first striking property of these results is the disproportional representation, finding that less than 30\%
-of professions carry a female connotation. This result is supported for example by reports from \cite{occu}, who estimate a 20\% to 32\% share of the labor market being women between 1920 and 1960, 
+of professions carry a female connotation. This result is supported, for example by reports from the U.S. Department of Labor \cite{occu}, who estimate a 20\% to 32\% share of the labor market being women between 1920 and 1960, 
 mainly in the field of domestic and personal service. 
-We also notice a strong prevalence of jobs in "Arts, Media and Entertainment" in the female direction of the axis, while most jobs that hold positions of power (particularly those in Law, Politics, and Finance), carry a strong association with the male direction of the axis (see Figure \ref{fig:genp}).
-These results are not surprising, and widely supported by historical evidence around the limited and polarized number of female workers during the time of writing of the books. 
-Even if gender imbalance in the labor markets is well‐known, showing that these patterns are embedded in material aimed at children uprising and education highlights how social expectations and constructs are transmitted in one's early life.
+We also notice that professions with female connotations are prevalently classified in "Arts, Media and Entertainment", while most jobs that hold positions of power (particularly those in Law, Politics, and Finance), carry a strong association with the male direction of the axis (see Figure \ref{fig:genp}).
+While these trends are well-known and widely supported by historical evidence around the limited and polarized number of female workers during the time of writing of the books, showing that these patterns are embedded in material aimed at children's uprising and education highlights how social expectations and constructs are transmitted in one's early life.
+
+Nonetheless, we also notice some unexpected associations, such as "cop" and "soldier", strongly associated with women.
+We associate the result for \textit{cop} with the presence of the word as a verb (e.g., "When they deserve to cop it.") in the dataset, more than as 
+a profession (e.g. ""We'll get away ahead of the cops, don't fear that"). However, we were not able to explain the result for \textit{soldier}
+and we leave this analysis for future work.
 
 \subsubsection{Gender bias in animals}
-Our findings suggest a strong correlation between gender and size of animals: those perceived as larger animals tend to be represented as male, whereas smaller animals are more often linked to female connotations.
-This is in line with our findings from the next session, which see the adjective 'giant' among the most masculine. This association demonstrates a perpetuation of the bias that associates men with power and strength and women with fragility and vulnerability. 
-Related studies \cite{submissive} also find high probability of female characters being portrayed as "submissive and dependent". 
+Our findings suggest a strong correlation between gender and the size of animals: those perceived as larger animals tend to be represented as male, whereas smaller animals are more often linked to female connotations.
+This is in line with our findings from the next session, which sees the adjective 'giant' among the most masculine. This association demonstrates a perpetuation of the bias that associates men with power and strength and women with fragility and vulnerability. 
+Related studies \cite{submissive} also find a high probability of female characters being portrayed as "submissive and dependent". 
 
-We also find an interesting outlier in the frog, as this is among the animals most similar to the male vector, despite being classified as a small animal. This finding is consistent to that of other work, such as in \cite{Walsh2025}.
-We associate this outlier with the strong popular image of the frog as a male character coming from the stories in our dataset such as The Frog Prince (the original version of the Princess and the Frog) \cite{princefrog}, or The Tale of Mr. Jeremy Fisher \cite{jeremy}, both depicting the frog as a male character.
+We also find an interesting outlier in the frog, as this is among the animals most strongly associated with the male cluster, despite being classified as a small animal. This finding is consistent with that of other work, such as in \cite{Walsh2025}.
+We associate this outlier with the strong popular image of the frog as a male character coming from some famous stories in our dataset, such as The Frog Prince (the original version of the Princess and the Frog) \cite{princefrog}, or The Tale of Mr. Jeremy Fisher \cite{jeremy}, both depicting the frog as a male character.
 
-Finally, we also find a higher pray to predator ratio among the animals with female association (3:1), than in those with male association (1:1). Oter studies find similar results \cite{predators}.
+Finally, we also find a higher prey-to-predator ratio among the animals with female association (3:1), than in those with male association (1:1). Other studies find similar results \cite{predators}.
 
 \subsubsection{Gender bias in descriptions}
-Firstly we find that the majority of adjectives carry a female connotation. This could reflect a bias found in the work of Caliskan et al.
-\cite{adjbias}, in which they find that “the top male-associated words are typically verbs while the top female-associated words are typically adjectives and adverbs”. As a result
+Firstly, we find that the majority of adjectives carry a female connotation. This could reflect a bias found in the work of Caliskan et al.
+\cite{adjbias}, in which they find that “the top male-associated words are typically verbs while the top female-associated words are typically adjectives and adverbs”. As a result,
 adjectives appear in the corpus more often as descriptors of women characters than of men characters.
 
-Moreover, we identify recurring gendered patterns across the adjectives, for example \textit{innocent, dependent, sensitive, emotional} associated to women, and .
+Moreover, we identify recurring gendered patterns across the adjectives, for example, \textit{innocent, dependent, sensitive, emotional} associated with women.
 As already mentioned above, this result reflects cultural expectations for women to remain submissive and passive, as well as a 
 cultural perception of women as emotional, impulsive and dramatic.
 
-There is no evidence indicating women are described positively more than men are, which is in contrast with the psychological phenomenon known as the women-are-wonderful effect \cite{wonderwoman}.
+There is no evidence indicating that women are described positively more than men are, which is in contrast with the psychological phenomenon known as the women-are-wonderful effect \cite{wonderwoman}.
 
 \subsection{Age Bias}
 \subsubsection{Age bias in professions}
-We firstly notice that the majority of the professions are associated with adults. This result is not surprising, as we do not expect children to have a job. Nonetheless, an interesting observation is that the majority of the professions strongly associated with youth, are also found in the female direction of the gender axis. This indicates further sexism in the perception of professions.
+We firstly notice that the majority of the professions are associated with adults. This result is not surprising, as we do not expect children to have a job. Nonetheless, an interesting observation is that the majority of the professions strongly associated with youth are also found in the female direction of the gender axis. This indicates further sexism in the perception of professions.
 
 \subsubsection{Age bias in animals}
-While we notice a slight tendency for larger animals being associated with adults, a more evident result is the association of all predators as adults. 
-This can be supported by the general understanding that predators only develop their pray abilities as adults, rather than 
-this representing a bias coming from antrophormism.
+While we notice a slight tendency for larger animals to be associated with adults, a more evident result is the association of all predators with adults. 
+However, this can be supported by the general understanding that predators only develop their prey abilities as adults, rather than 
+this representing a bias coming from anthropomorphism.
 
 \section{Socioeconomic bias}
 
@@ -262,26 +272,31 @@ this representing a bias coming from antrophormism.
 We see a strong correlation between large animals and the "rich" direction of the bias axis. Similarly to the discussion previously mentioned, large animals are associated with strength and power, two features that are stereotypically associated with rich people.
 
 \subsubsection{Class bias in descriptions}
-As can be seen in Figure \ref{fig:class_adj}, adjectives show the strongest display of aporophobia, with a ranking that features the great majority of positive adjectives associated to 'rich' (e.g., \textit{elegant, artistic, independent, successful}), 
-and almost all negative adjectives associated to 'poor' (e.g. \textit{scared, dirty, silly, weak}).
+As can be seen in Figure \ref{fig:class_adj}, adjectives show a strong display of aporophobia, with a ranking that features the great majority of positive adjectives associated with 'rich' (e.g., \textit{elegant, artistic, independent, successful}), 
+and almost all negative adjectives associated with 'poor' (e.g., \textit{scared, dirty, silly, weak}).
 
-This finding can be explained by the social and economic hierarchies determined by wealth as a measure of material, moral and cultural superiority. This demonstrates that classic children literature illustrates poverty as fear, ignorance, and weakness, reflecting and reinforcing societal prejudices. 
+This finding can be explained by the social and economic hierarchies determined by wealth as a measure of material, moral, and cultural superiority. This demonstrates that classic children's literature illustrates poverty as fear, ignorance, and weakness, reflecting and reinforcing societal prejudices. 
+
+However, this result could reflect a bias in some words of the axis pairs, which sometimes are strongly associated with negative
+social sentiments (such as \textit{beggar}). Moreover, the bias axis is found from few pairs, resulting is a less stable and more biased axis.
 
 \subsection{Bias Shift}
-In Table \ref{tab:bias_shifts} are the total shifts for each bias and target group. A positive shift refers to a cumulative shift of target vectors towards a perpendicular angle to the axis, while a negative shift indicates vectors got cumulatively more aligned with the axis, enforcing the bias.
-We notice an overall improvement, with a consistent positive shift across all biases for Profession and Animals, as well as across all target groups for the socioeconomic bias (see Figure \ref{fig:shiftclass}). A general increase in women representation, which would explain a reduction in gender bias, is consistent with findings of \cite{Massman1979}.
+In Table \ref{tab:bias_shifts} are the total shifts for each bias and target group. A positive value refers to a cumulative shift of target vectors towards a perpendicular angle to the axis, while a negative shift indicates vectors got cumulatively more aligned with the axis, enforcing the bias.
+We notice an overall improvement, with a consistent positive shift across all biases for Profession and Animals, as well as across all target groups for the socioeconomic bias (see Figure \ref{fig:shiftclass}). A general increase in women's representation, which would explain a reduction in gender bias, is consistent with findings of \cite{Massman1979}.
 We do, however, report a negative shift in gender and age bias for adjectives. 
 
 \begin{figure}
     \centering
+    \foo
     \includegraphics[width=1\linewidth]{class_adj_shift.png}
-    \caption{Comparison of scores before and after finetuning with modern stories for some adjectives.}
+    \caption{Scores before and after finetuning.}
     \label{fig:shiftclass}
 \end{figure}
 
 
 \begin{table}[h!]
 \centering
+\small
 \begin{tabular}{lrrrr}
 \hline
 \textbf{Bias} & \textbf{Professions} & \textbf{Adjectives} & \textbf{Animals} \\
@@ -296,20 +311,23 @@ Class  & 4.8430 & 6.6441  & 3.1435 \\
 \end{table}
 
 \section{Discussion and Outlook}
-This research demonstrates strong biases, particularly sexism in professions, animal figures, and descriptions, reverse ageism in animal figures, and aporophobia in professions, animal figures, and descriptions. The focus on children literature shows that children are exposed to these prejudice and social constructs since early development. It is therefore fundamental that language in books aimed at the young public are carefully examined for conscious and unconscious bias.
+This research demonstrates strong biases, particularly sexism in professions, animal figures, and descriptions, reverse ageism in animal figures, and aporophobia in animal figures and descriptions. The focus on children's literature shows that children are exposed to these prejudices and social constructs since early development. It is therefore fundamental that language in books aimed at the young public are carefully examined for conscious and unconscious bias.
 
-Our findings indicate a general decrease in gender, age and socioeconomic bias in modern children stories. Nonetheless some bias is still present and requires further improving. This and similar work is of value to address present prejudice that is being transmitted to children since a young age, particularly in the education sector.
-Future research direction should focus on developing similar frameworks capable of identifying multi directional bias, such as that of race and ethnicity, where a single axis is not sufficient for defining all bias directions.
-We also propose the analysis of non-binary gender to future work. This was not considered in this study due to the lack of representation
-of these groups in classic books. 
-Finally, we identify a gap in the research of aporaphobia and socioecnomic bias in word embeddings compared to other biases.
-We therefore a more in depth analysis of aporaphobia in literature is a potential direction for future work. 
+Our findings indicate a general decrease in gender, age, and socioeconomic bias in modern children's stories. Nonetheless, some bias is still present and requires further improvement. This and similar work is of value to address present prejudice that is being transmitted to children from a young age, particularly in the education sector.
+Future research direction should focus on developing similar frameworks capable of identifying multi-directional bias, such as that of race and ethnicity, where a single axis is not sufficient for defining all bias directions.
+We also leave the analysis of non-binary gender to future work. Non-binary gender bias is not included in this study due to the lack of representation
+in classic books. 
+Finally, we identify a gap in the research of aporophobia and socioecnomic bias in word embeddings compared to other biases, and is also more limited in this project.
+We believe that a more in depth analysis of aporophobia in literature is a potential direction for future work. 
 
 %Limitations
-Below we report some notable limitation of our work. Firstly, the target words, axis pairs, and categories are derived from three annotators. More annotators would result in more stable axis, less biased target groups, and more reliable categories.
-Secondly, we finetuned the model with stories freely available online from a single source. There are not representative of all stories and children books today. A larger database of modern children books, particularly edited books, is a more representative
-set of books read by children nowadays. 
-Finally, most of our findings are validated through comparison with a small set of expert findings. We therefore want to note that findings require more thorough validation by careful examination of the dataset and statistical methods, which were not explored in this project due to time constrains.
+Below, we report some notable limitations of our work. Firstly, the target words, axis pairs, and categories are derived from three annotators. More annotators would result in more stable axes, less biased target groups, and more reliable categories,
+particularly in the case of the limited direction pairs for the socioeconomic bias axis.
+
+Secondly, we finetuned the model with stories freely available online from a single source. Thery are not representative of all stories and children's books today. A larger database of modern children's books, particularly edited books, is a more representative
+set of modern books read by children nowadays. WEAT could also be employed as a method to compare relative bias between a classic and a
+modern books datasets. 
+Finally, most of our findings are validated through comparison with a small set of expert findings. We therefore want to note that findings require more thorough validation by careful examination of the dataset and statistical methods, which were not explored in this project.
 
 
 \bibliographystyle{ACM-Reference-Format}
@@ -324,6 +342,66 @@ Finally, most of our findings are validated through comparison with a small set 
 
 \appendix
 \section{Work report}
+The first stage was dedicated to gathering the dataset of books, their author and year of publishing from the Project Gutenberg \cite{gutenberg} and 
+the Bedtime Stories database \cite{btstories}. This project was particularly time consuming because of the difficulty in finding a freely available dataset of modern books, 
+and in developing a robust and reliable crawler. 
+We then focused on identifying patterns in the rankings, a process which required a lot of thinking outside the box, discussing with peers, researching and comparing previous findings.
+As an example, consider the pattern of predators associated with adults. Its interpretaition was not straightforwards.
+After lots of reading and discussing, two main conclusions were drawn: either its a simple association to animals preying 
+only in their adult life, or it rose from a suble reference to abuse. However the second was scarsly and poorly supported by the literature, and was therefore discarded.
+Due to the time and word limit, we were also pushed to select which trends were more significant and which could be left out due to lack of statistical 
+evidence, or support in the literature.
+
+
+\section{Graphs}
+\label{sec:graphs}
+
+Here we present graphs relevant to the results mentiond in Section \ref{sec:results}, but that were not included due to page limit.
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{age_adj.png}
+    \caption{Adjectives projection on the Age axis}
+    \descriptionlabel{We do not report particular significant results.}
+    \label{fig:class_adj}
+\end{figure*}
+
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{gen_animal_size.png}
+    \caption{Animal projection on the Gender axis, classified by size}
+    \descriptionlabel{We report a pattern for larger animals associated to male on a (subset) of animal terms}
+    \label{fig:class_adj}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{Gender_Animals_PP_output_.png}
+    \caption{Animal projection on the Gender axis, classified by pray-predator type}
+    \descriptionlabel{The ratio of predators-pray is higher for animals associated with male than with female}
+    \label{fig:class_adj}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{Age_Animals_PP_output_.png}
+    \caption{Animal projection on the Age axis, classified by pray-predator type}
+    \descriptionlabel{We notice all predators are asssociated with adults.}
+    \label{fig:class_adj}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=1\linewidth]{Class_Animals_Size_output_.png}
+    \caption{Animal projection on the Class axis, classified by size}
+    \descriptionlabel{We notice a pattern in large animals associated with rich.}
+    \label{fig:class_adj}
+\end{figure*}
+
+
+\clearpage
 
 \section{Axis pairs}
 \label{sec:pairs}
@@ -359,17 +437,13 @@ poor              & wealthy \\
 impoverished      & millionaire \\
 destitute         & billionaire \\
 low-income        & affluent \\
-homeless          & opulent \\
-needy             & high-income \\
 underprivileged   & aristocrat \\
 working-class     & tycoon \\
 struggling        & elite \\
-day-laborer       & magnate \\
-pauper            & heiress \\
-beggar            & heir \\
+beggar            & magnate  \\
 underclass        & prosperous \\
 broke             & luxurious \\
-disadvantaged     & upper-class \\
+lower-class       & upper-class \\
 \end{tabular}
 \caption{Pairs of words used for the socioeconomic bias axis.}
 \end{table}
@@ -496,7 +570,7 @@ teacher & -0.2001 & -0.2363 & -0.0253 & -0.1782 & -0.0464 & -0.0694 \\
 \bottomrule
 \bottomrule
 \end{tabular}
-\caption{Scores for the projection of all professions against each bias axis before and after tuning}
+\caption{Scores for the projection of all professions against each bias axis before (O) and after (F) tuning}
 \end{table}
 
 \clearpage
@@ -566,7 +640,7 @@ emotional & -0.1728 & -0.1325 & -0.2621 & -0.1017 & 0.1225 & 0.1228 \\
 sensitive & -0.1866 & -0.0130 & -0.2903 & -0.2552 & -0.0101 & 0.0136 \\
 \bottomrule
 \end{tabular}
-\caption{Scores for the projection of all adjectives against each bias axis before and after tuning}
+\caption{Scores for the projection of all adjectives against each bias axis before (O) and after (F) tuning}
 \end{table}
 
 \clearpage
@@ -629,7 +703,7 @@ hamster & 0.1522 & 0.0598 & 0.0042 & 0.0090 & -0.0259 & 0.0285 \\
 
 \bottomrule
 \end{tabular}
-\caption{Scores for the projection of all animals against each bias axis before and after tuning}
+\caption{Scores for the projection of all animals against each bias axis before (O) and after (F) tuning}
 \end{table}
 
 

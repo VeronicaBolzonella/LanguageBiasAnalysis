@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex report"] 1765119992.55476 "report.aux" "report.bbl" "report" 1765119997.39718 0
+["bibtex report"] 1765536879.80838 "report.aux" "report.bbl" "report" 1765536879.91597 2
   "./sigprobib.bib" 1765116949.00264 10240 e5b71f25ae7dcf13ed6b5e883a6b491e ""
   "ACM-Reference-Format.bst" 0 -1 0 ""
-  "report.aux" 1765119996.97552 8113 d288b7ca47188cebcccc0806d9620f8f "pdflatex"
+  "report.aux" 1765536879.8062 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1765119992.64299 "/home/veronica/projects/LateX stuff/project_TxMM/txmm2025_paper_template/report.tex" "report.pdf" "report" 1765119997.39735 0
+["pdflatex"] 1765536868.54295 "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" "report.pdf" "report" 1765536879.71494 2
   "/etc/texmf/web2c/texmf.cnf" 1765019691.06792 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/veronica/projects/LateX stuff/project_TxMM/txmm2025_paper_template/report.tex" 1765119982.98261 37049 e83405203fa2afdccf2ac965fc62d590 ""
+  "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" 1765536868.36251 41017 3562b88567649dfe5fb6f68b3a956174 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1490131464 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
@@ -180,14 +180,19 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1765019715.69131 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1765019782 8214151 b68b6e886903115e6ea3c7eae0802144 ""
+  "Age_Animals_PP_output_.png" 1764688964.36901 1005112 8b7c48d028bcb4c67379377163ae5515 ""
+  "Class_Animals_Size_output_.png" 1764437535.26041 351126 ddc84434b2053a044bd4d186ef986d78 ""
+  "Gender_Animals_PP_output_.png" 1764688955.49196 999683 573761dd6ccfd4d2ca9d910ad28f7618 ""
   "acmart-txmm.cls" 1765014702 75137 cbfab52223667b49a51e83621ff80056 ""
+  "age_adj.png" 1765014704 747343 5f89ea2beddf9e70719820a0ec9e46c2 ""
   "class_adj.png" 1765014702 600515 9f4a83a2e9b33d82ec5840f7f314716b ""
   "class_adj_shift.png" 1765014702 1069350 5ed52da1146655b6dc388d3785e724c8 ""
+  "gen_animal_size.png" 1765108701.29758 809740 ef44ac76d03b67344b592a9502af5f2c ""
   "gen_profession.png" 1765109847.45941 1274449 38e07ab5bf9cbe04e055cd38fe52cd3d ""
-  "report.aux" 1765119996.97552 8113 d288b7ca47188cebcccc0806d9620f8f "pdflatex"
-  "report.bbl" 1765119992.63898 11169 acc86b851858087068222976923ffa7a "bibtex report"
-  "report.out" 1765119996.97652 1842 dd070875cad9e1341a36834c4883aede "pdflatex"
-  "report.tex" 1765119982.98261 37049 e83405203fa2afdccf2ac965fc62d590 ""
+  "report.aux" 1765536879.8062 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "report.bbl" 1765536879.91254 0 d41d8cd98f00b204e9800998ecf8427e "bibtex report"
+  "report.out" 0 -1 0 "pdflatex"
+  "report.tex" 1765536868.36251 41017 3562b88567649dfe5fb6f68b3a956174 ""
   (generated)
   "report.aux"
   "report.log"
