@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex report"] 1765536879.80838 "report.aux" "report.bbl" "report" 1765536879.91597 2
+["bibtex report"] 1765537188.42502 "report.aux" "report.bbl" "report" 1765537200.46361 0
   "./sigprobib.bib" 1765116949.00264 10240 e5b71f25ae7dcf13ed6b5e883a6b491e ""
   "ACM-Reference-Format.bst" 0 -1 0 ""
-  "report.aux" 1765536879.8062 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "report.aux" 1765537199.94861 9795 0a29ad1ed73c88e0e20ad943c88197f7 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1765536868.54295 "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" "report.pdf" "report" 1765536879.71494 2
+["pdflatex"] 1765537188.56003 "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" "report.pdf" "report" 1765537200.46385 0
   "/etc/texmf/web2c/texmf.cnf" 1765019691.06792 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" 1765536868.36251 41017 3562b88567649dfe5fb6f68b3a956174 ""
+  "/home/veronica/projects/LanguageBiasAnalysis/Report/txmm2025_paper_template/report.tex" 1765537164.79926 41008 b9eb9c0a4556f07a854acbfcedd9ca34 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1490131464 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
@@ -189,10 +189,10 @@
   "class_adj_shift.png" 1765014702 1069350 5ed52da1146655b6dc388d3785e724c8 ""
   "gen_animal_size.png" 1765108701.29758 809740 ef44ac76d03b67344b592a9502af5f2c ""
   "gen_profession.png" 1765109847.45941 1274449 38e07ab5bf9cbe04e055cd38fe52cd3d ""
-  "report.aux" 1765536879.8062 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "report.bbl" 1765536879.91254 0 d41d8cd98f00b204e9800998ecf8427e "bibtex report"
-  "report.out" 0 -1 0 "pdflatex"
-  "report.tex" 1765536868.36251 41017 3562b88567649dfe5fb6f68b3a956174 ""
+  "report.aux" 1765537199.94861 9795 0a29ad1ed73c88e0e20ad943c88197f7 "pdflatex"
+  "report.bbl" 1765537188.55465 11169 acc86b851858087068222976923ffa7a "bibtex report"
+  "report.out" 1765537199.94961 1930 0370837dbcdeb19434f917ee65808ebe "pdflatex"
+  "report.tex" 1765537164.79926 41008 b9eb9c0a4556f07a854acbfcedd9ca34 ""
   (generated)
   "report.aux"
   "report.log"
